@@ -1,0 +1,31 @@
+Name: rdiff-backup-server
+Cartridge-Short-Name: rdiff-backup
+Display-Name: rdiff Backup Server
+Version: "0.0.1"
+Website: https://github.com/a13m/openshift-backup-cartridge
+Cartridge-Version: 0.0.1
+Cartridge-Vendor: a13m
+Categories:
+  - service
+  - domain_scope
+Provides:
+  - rdiff-backup
+Scaling:
+  Min: 1
+  Max: -1
+Cart-Data:
+  - Key: OPENSHIFT_BACKUP_IP
+    Type: environment
+    Description: "IP Address of backup service."
+  - Key: OPENSHIFT_BACKUP_PORT
+    Type: environment
+    Description: "Port of backup service."
+  - Key: OPENSHIFT_APP_DNS
+    Type: environment
+    Description: "Fully qualified domain name for the application."
+  - Key: OPENSHIFT_APP_NAME
+    Type: environment
+    Description: "Application name"
+  - Key: OPENSHIFT_DATA_DIR
+    Type: environment
+    Description: "Directory to store application data files. Preserved across git-pushes. Not shared across gears."
