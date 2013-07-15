@@ -5,7 +5,7 @@ Version: "0.0.1"
 Website: https://github.com/a13m/openshift-backup-cartridge
 Cartridge-Version: 0.0.1
 Cartridge-Vendor: a13m
-Source-Url: https://github.com/a13m/openshift-backup-cartridge.git
+Source-Url: https://github.com/a13m/openshift-backup-cartridge/archive/master.zip
 Categories:
   - service
   - domain_scope
