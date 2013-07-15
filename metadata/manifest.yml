@@ -1,5 +1,5 @@
 Name: rdiff-backup-server
-Cartridge-Short-Name: rdiff-backup
+Cartridge-Short-Name: rdiff
 Display-Name: rdiff Backup Server
 Version: "0.0.1"
 Website: https://github.com/a13m/openshift-backup-cartridge
