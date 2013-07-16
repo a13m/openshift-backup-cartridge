@@ -1,0 +1,46 @@
+#!/usr/bin/env oo-ruby
+
+require 'rest-client'
+require 'json'
+
+base_rest_url = "https://#{ENV['OPENSHIFT_BROKER_HOST']}/broker/rest"
+namespace = nil
+
+
+# Keeping these separate, as we may use them as params in POST requests
+# Note that we need to strip all newlines in order to send these in GET request headers.
+params = { 'broker_auth_key' => File.read("#{ENV['HOME']}/.auth/token").gsub("\n", ""), 
+           'broker_auth_iv' => File.read("#{ENV['HOME']}/.auth/iv").gsub("\n", "") }
+
+request = RestClient::Request.new(:method => :get, 
+                                  :url => "#{base_rest_url}/domains", 
+                                  :timeout => 600, 
+                                  :headers => {:accept => 'application/json',
+                                               :user_agent => 'OpenShift',
+                                               :broker_auth_key => params['broker_auth_key'],
+                                               :broker_auth_iv => params['broker_auth_iv'] })
+
+response = request.execute()
+parsed_response = JSON.parse(response)
+parsed_response['data'].each do |domain|
+  namespace = domain['id']
+end
+
+if namespace.nil?
+  puts "Could not find namespace"
+  exit
+end
+
+request = RestClient::Request.new(:method => :get, 
+                                  :url => "#{base_rest_url}/domains/#{namespace}/applications", 
+                                  :timeout => 600, 
+                                  :headers => {:accept => 'application/json',
+                                               :user_agent => 'OpenShift',
+                                               :broker_auth_key => params['broker_auth_key'],
+                                               :broker_auth_iv => params['broker_auth_iv'] })
+
+response = request.execute()
+parsed_response = JSON.parse(response)
+parsed_response['data'].each do |app|
+  puts app['name'] + ' ' + app['ssh_url']
+end
