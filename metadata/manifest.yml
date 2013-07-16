@@ -5,9 +5,9 @@ Version: "0.0.1"
 Website: https://github.com/a13m/openshift-backup-cartridge
 Cartridge-Version: 0.0.1
 Cartridge-Vendor: a13m
-Source-Url: https://github.com/a13m/openshift-backup-cartridge/archive/master.zip
 Categories:
   - service
+  - embedded
   - domain_scope
 Provides:
   - rdiff-backup
@@ -21,12 +21,4 @@ Cart-Data:
   - Key: OPENSHIFT_BACKUP_PORT
     Type: environment
     Description: "Port of backup service."
-  - Key: OPENSHIFT_APP_DNS
-    Type: environment
-    Description: "Fully qualified domain name for the application."
-  - Key: OPENSHIFT_APP_NAME
-    Type: environment
-    Description: "Application name"
-  - Key: OPENSHIFT_DATA_DIR
-    Type: environment
-    Description: "Directory to store application data files. Preserved across git-pushes. Not shared across gears."
+Source-Url: https://github.com/a13m/openshift-backup-cartridge/archive/master.zip
